@@ -80,7 +80,40 @@ void secondlvl()
 }
 void thirdlvl()
 {
+    queue <int> FirstNumbers, SecondNumbers;
 
+    int* P1, * P2, * P3, * P4, arr[3], count = 0;
+	cout << "Элементы первой очереди:";
+    for (int i = 1; i <= 10; i++)
+    {
+		if (i % 2 != 0)
+		{
+			SecondNumbers.push(i);
+			cout << SecondNumbers.back() << " ";
+		}
+    }  
+	cout << endl;
+	cout << "Элементы второй очереди:";
+	for (int i = 1; i <= 10; i++)
+	{
+		if (i % 2 == 0)
+		{
+			FirstNumbers.push(i);
+			cout << FirstNumbers.back() << " ";
+		}
+	}
+
+    cout << endl << endl;
+
+    //присваиваем адреса и выводим их;
+    P1 = &FirstNumbers.front();
+    P2 = &FirstNumbers.back();
+    P3 = &SecondNumbers.front();
+    P4 = &SecondNumbers.back();
+
+    cout << endl << "Адреса первого и последнего элементов первой очереди: " << P1 << ", " << P2 << endl;
+	cout << endl << "Адреса первого и последнего элементов второй очереди: " << P3 << ", " << P4 << endl;
+	cout << endl;
 }
 
 int main()
