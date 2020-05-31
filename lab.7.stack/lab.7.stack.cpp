@@ -1,85 +1,82 @@
 ﻿#include <iostream>
 #include <ctime>
 #include <stack>
-
+#include <queue>
 using namespace std;
 
-struct Stack
+
+void firstlvl() 
 {
-	double max=0;
-	double a;
-	Stack* prevstack = nullptr;
-	Stack* prevA = nullptr;
-	void setInf() {
-		a =rand() % 100 * 0.1;
+	stack <double> Numbers;
+
+	cout << "Введите кол-во чисел для ввода: " << endl;
+	double size, a, max = 0;
+	cin >> size;
+	for (int i = 0; i < size; i++)
+	{
+		a = rand() % 100 * 0.1;
+
+		Numbers.push(a);
 		if (a > max)
 		{
 			max = a;
 		}
 	}
-	void getInf() {
-		cout << a << "  ";
-	}
-	void getMax() {
-		cout << endl << "Максимальный элемент: " << max << endl;
-	}
-};
 
-struct StackOfNumbers
-{
-	Stack* max;
-	Stack* currentA = nullptr;
-	Stack* prevA = nullptr;
-
-	void add()
+	cout << "Элементы в стеке: ";
+	while (!Numbers.empty())
 	{
-		prevA = currentA;
-		currentA = new Stack();
-		currentA->prevA = prevA;
-		currentA->setInf();
+		cout << ' ' << Numbers.top();
+		Numbers.pop();
 	}
-
-	void show()
-	{
-		prevA = currentA;
-		while (currentA)
-		{
-			currentA->getInf();
-			currentA = currentA->prevA;
-		}
-		max->getMax();
-		currentA = prevA;
-		prevA = prevA->prevA;
-	}
-
-	void clear()
-	{
-		while (currentA)
-		{
-			prevA = currentA->prevA;
-			delete currentA;
-			currentA = prevA;
-		}
-		prevA = nullptr; //Возможно не стоит
-	}
-};
-
-
-
-void firstlvl() 
-{
-	StackOfNumbers stack;
-	for (size_t i = 0; i < 10; i++)
-	{
-		stack.add();
-	}
-	stack.show();
-	stack.clear();
+	cout << endl << "Максимальное число в стеке: " << max << endl;
 }
 
 void secondlvl()
 {
+	queue <double> Numbers;
+	double arr[3], sum = 0;
 
+	Numbers.push(2.1);
+	Numbers.push(2.1);
+	Numbers.push(5.3);
+
+	if (Numbers.empty())
+	{
+		cout << "Очередь пуста" << endl << endl;
+	}
+	else
+	{
+		cout << "Первые 3 числа очереди: ";
+
+		for (int i = 0; i < 3;i++)
+		{
+			cout << Numbers.front() << " ";
+			arr[i] = Numbers.front();
+			Numbers.pop();
+		}
+
+		cout << endl << endl;
+		for (int i = 0; i < 3; i++)
+		{
+			Numbers.push(arr[i]);
+		}
+		Numbers.push(4.9);
+
+		if (!Numbers.empty())
+		{
+			cout << "Числа очереди после добавление 4-ого элемента: ";
+
+			for (int i = 0; i < 4; i++)
+			{
+				cout << Numbers.front() << " ";
+				sum += Numbers.front();
+				Numbers.pop();
+			}
+
+			cout << endl << endl << "Сумма чисел в очериди: " << sum << endl << endl;
+		}
+	}
 }
 void thirdlvl()
 {
@@ -104,11 +101,11 @@ int main()
 			firstlvl();
 			break;
 		case 2:
-			cout << "Добавить в Memo или в StringGrid некоторое количество символов русского алфавита и записать их в бинарный файл. Переписать бинарный файл так, чтобы все символы были записаны заглавными буквами. Распечатать символы до и после изменения данных в файле." << endl << endl;
+			cout << "Создать очередь вещественных значений, для реализации используя односвязные списки. Реализовать операции добавления(enqueue) и удаление(dequeue) элемента из очереди. Добавьте в очередь числа 2.1,2.1, 5.3 и распечатайте содержимое очереди. Удалите 1 элемент изочереди, затем добавьте в очередь число 4.9 и распечатайте очередь ещераз. Найдите сумму элементов очереди." << endl << endl;
 			secondlvl();
 			break;
 		case 3:
-			cout << "Создать бинарный файл, компонентами которого является структура,содержащая следующие поля:\n- фамилия и инициалы покупателя;\n- дата покупки;\n- общая стоимость приобретенного товара за первое полугодие;\n- общая стоимость приобретенного товара за второе полугодие;\n- начальный процент скидки на последующие приобретаемые товары;\nПереписать бинарный файл так, чтобы процентная скидка была бы увеличена на 7%, если покупатель заплатил за предыдущий товар в первоми во втором полугодиях не менее 10000 грн." << endl << endl;
+			cout << "Дан набор из 10 чисел. Создать две очереди: первая должна содержать числа из исходного набора с нечетными номерами (1, 3,…, 9), а вторая -с четными (2, 4,…, 10); в каждой очереди должен совпадать с порядком чисел в исходном наборе. Вывести указатели на начало и конец первой, а затем второй очереди." << endl << endl;
 			thirdlvl();
 			break;
 		case 0:
